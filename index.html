@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite German Motors | Dealer Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            background-color: #0a0a0a;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Login Screen */
+        #login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1535732820275-9ffd998cac22?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+        }
+        
+        .login-container {
+            background: rgba(20, 20, 20, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            border: 1px solid #c89f63;
+        }
+        
+        .login-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #c89f63;
+        }
+        
+        .login-logo i {
+            margin-right: 10px;
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid #444;
+            transition: all 0.3s;
+        }
+        
+        .login-form input:focus {
+            outline: none;
+            border-color: #c89f63;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: #c89f63;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .login-btn:hover {
+            background: #b38a52;
+        }
+        
+        /* Main Content (initially hidden) */
+        #main-content {
+            display: none;
+            flex: 1;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, #000, #1a1a1a);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #c89f63;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 32px;
+            color: #c89f63;
+        }
+        
+        .dealer-info {
+            text-align: right;
+            font-size: 14px;
+        }
+        
+        .dealer-name {
+            color: #c89f63;
+            font-weight: 600;
+        }
+        
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(to right, #1a1a1a, #2a2a2a);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #c89f63;
+        }
+        
+        .welcome-banner h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .welcome-banner p {
+            font-size: 16px;
+            color: #ccc;
+        }
+        
+        /* Cars Section */
+        .cars-section {
+            padding: 40px 0 80px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #c89f63;
+        }
+        
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .car-card {
+            background: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+        
+        .car-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+            border-color: #c89f63;
+        }
+        
+        .car-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .car-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .car-card:hover .car-image img {
+            transform: scale(1.05);
+        }
+        
+        .export-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #c89f63;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .car-details {
+            padding: 20px;
+        }
+        
+        .car-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        
+        .car-specs {
+            color: #aaa;
+            margin-bottom: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .car-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: #c89f63;
+            margin-bottom: 15px;
+        }
+        
+        .car-price .original {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        
+        .car-price .export {
+            font-size: 20px;
+            color: #4CAF50;
+        }
+        
+        .car-features {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+        }
+        
+        .feature {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .feature i {
+            color: #c89f63;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .feature span {
+            display: block;
+            font-size: 11px;
+            color: #999;
+        }
+        
+        /* Footer */
+        footer {
+            background: #111;
+            color: #fff;
+            padding: 40px 0 20px;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #c89f63;
+        }
+        
+        .footer-column p, .footer-column li {
+            margin-bottom: 8px;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 6px;
+        }
+        
+        .footer-column a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: #c89f63;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #c89f63;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .cars-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .dealer-info {
+                text-align: center;
+                margin-top: 15px;
+            }
+            
+            .cars-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .car-image {
+                height: 220px;
+            }
+            
+            .login-container {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .car-features {
+                flex-wrap: wrap;
+            }
+            
+            .feature {
+                flex: 0 0 50%;
+                margin-bottom: 10px;
+            }
+            
+            .welcome-banner h1 {
+                font-size: 26px;
+            }
+            
+            .section-title h2 {
+                font-size: 26px;
+            }
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen">
+        <div class="login-container">
+            <div class="login-logo">
+                <i class="fas fa-lock"></i> Dealer Access
+            </div>
+            <p style="margin-bottom: 20px; color: #ccc;">Enter password to access dealer stock</p>
+            <div class="login-form">
+                <input type="password" id="password-input" placeholder="Enter dealer password">
+                <button class="login-btn" onclick="checkPassword()">Access Portal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Welcome back streetcars.su
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <i class="fas fa-car logo-icon"></i>
+                        Elite <span>German</span> Motors
+                    </div>
+                    <div class="dealer-info">
+                        <div class="dealer-name">streetcars.su</div>
+                        <div>Dealer ID: <span id="dealer-id">DLR-4297</span></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+            <div class="container">
+                <h1>Dealer Stock Management</h1>
+                <p>Exclusive access to premium German automotive inventory</p>
+            </div>
+        </div>
+
+        <!-- Cars Section -->
+        <section class="cars-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Current Inventory</h2>
+                </div>
+                
+                <div class="cars-grid">
+                    <!-- Car 1 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/hf1iel.webp" alt="Mercedes-Benz GLE 63 AMG 2021">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">Mercedes-Benz GLE 63 AMG</h3>
+                            <p class="car-specs">2021 • S Coupé 4-Matic+ • XXXX km • 5,5L V8 Biturbo</p>
+                            <div class="car-price">
+                                <span class="original">€86,800</span>
+                                <span class="export">€81,800</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>612 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>Automatic</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>SUV</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Car 2 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/salzsk.webp" alt="2016 Mercedes-Benz GLE 63 AMG">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">Mercedes-Benz GLE 63 AMG</h3>
+                            <p class="car-specs">2016 • GLE-Coupe Coupe 4Matic • XXXX km • 5,5L V8 Biturbo</p>
+                            <div class="car-price">
+                                <span class="original">€29,500</span>
+                                <span class="export">€24,500</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>557 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>7G-Tronic</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>SUV</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Car 3 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/ailx9k.webp" alt="Mercedes-Benz C 63 AMG">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">Mercedes-Benz C 63 AMG</h3>
+                            <p class="car-specs">2021 • 4Matic+ • XXXX km • 4.0L V8 Biturbo</p>
+                            <div class="car-price">
+                                <span class="original">€32,000</span>
+                                <span class="export">€27,000</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>510 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>9G-Tronic</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>Sedan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Car 4 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/rcj54u.webp" alt="Mercedes-Benz E 63 AMG">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">Mercedes-Benz E 63 AMG</h3>
+                            <p class="car-specs">2020 • S 4Matic+ • XXXX km • 4.0L V8 Biturbo</p>
+                            <div class="car-price">
+                                <span class="original">€41,000</span>
+                                <span class="export">€36,000</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>612 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>9G-Tronic</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>Sedan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Car 5 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/o8pn7u.webp" alt="Volkswagen Golf R">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">Volkswagen Golf R</h3>
+                            <p class="car-specs">2022 • Golf 8R Performance • XXXX km • 2.0L TSI</p>
+                            <div class="car-price">
+                                <span class="original">€20,000</span>
+                                <span class="export">€15,000</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>320 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>DSG</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>Hatchback</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Car 6 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/06sjs9.webp" alt="BMW M3 G80 Competition">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">BMW M3 G80 Competition</h3>
+                            <p class="car-specs">2022 • Competition • XXXX km • 3.0L I6 TwinPower Turbo</p>
+                            <div class="car-price">
+                                <span class="original">€42,000</span>
+                                <span class="export">€37,000</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>510 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>8-Speed Auto</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>Sedan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Car 7 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/tmksb0.webp" alt="BMW M4 Competition">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">BMW M4 Competition</h3>
+                            <p class="car-specs">2023 • Competition LCI • XXXX km • 3.0L I6 TwinPower Turbo</p>
+                            <div class="car-price">
+                                <span class="original">€30,000</span>
+                                <span class="export">€25,000</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>510 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>8-Speed Auto</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>Coupe</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Car 8 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/rg3lit.webp" alt="Porsche Cayenne">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">Porsche Cayenne</h3>
+                            <p class="car-specs">2018 • 3.0 D V6 • XXXX km • 3.0L V6 Turbo Diesel</p>
+                            <div class="car-price">
+                                <span class="original">€16,000</span>
+                                <span class="export">€11,000</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>262 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Diesel</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>Tiptronic S</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>SUV</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Car 9 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/3v0j7x.webp" alt="Audi RS Q3">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">Audi RS Q3 Sportback</h3>
+                            <p class="car-specs">2021 • 2.5 TFSI Quattro • XXXX km • 2.5L TFSI</p>
+                            <div class="car-price">
+                                <span class="original">€31,000</span>
+                                <span class="export">€26,000</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>400 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>S tronic</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>SUV</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Car 10 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/aquko0.webp" alt="BMW X6">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">BMW X6 xDrive30d</h3>
+                            <p class="car-specs">2022 • xDrive30d xLine • XXXX km • 3.0L Diesel</p>
+                            <div class="car-price">
+                                <span class="original">€39,000</span>
+                                <span class="export">€34,000</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>265 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Diesel</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>8-Speed Auto</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>SUV</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Car 11 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/ihl3te.webp" alt="Lamborghini Aventador">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">Lamborghini Aventador</h3>
+                            <p class="car-specs">2022 • Ultimae Roadster LP780-4 • XXXX km • 6.5L V12</p>
+                            <div class="car-price">
+                                <span class="original">€350,000</span>
+                                <span class="export">€345,000</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>780 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>7-Speed ISR</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>Supercar</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Car 12 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/tjulte.webp" alt="2015 Mercedes-Benz G 63 AMG">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">Mercedes-Benz G 63 AMG</h3>
+                            <p class="car-specs">2015 • 4Matic • XXXX km • 5.5L V8 Biturbo</p>
+                            <div class="car-price">
+                                <span class="original">€31,000</span>
+                                <span class="export">€26,000</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>571 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>7G-Tronic</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>SUV</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Car 13 -->
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/k15f8f.webp" alt="2024 Mercedes-Benz G 63 AMG">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">Mercedes-Benz G 63 AMG</h3>
+                            <p class="car-specs">2024 • Édition Black • XXXX km • 4.0L V8 Biturbo</p>
+                            <div class="car-price">
+                                <span class="original">€83,000</span>
+                                <span class="export">€78,000</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>585 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>9G-Tronic</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>SUV</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>Elite German Motors</h3>
+                        <p>Exclusive dealer portal for premium German automotive inventory management.</p>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Dealer Resources</h3>
+                        <ul>
+                            <li><a href="#">Inventory Management</a></li>
+                            <li><a href="#">Sales Reports</a></li>
+                            <li><a href="#">Export Documentation</a></li>
+                            <li><a href="#">Vehicle Logistics</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Contact Support</h3>
+                        <p><i class="fas fa-phone"></i> +49 (0) 89 12345678</p>
+                        <p><i class="fas fa-envelope"></i> support@elitegermanmotors.de</p>
+                        
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="copyright">
+                    <p>&copy; 2023 Elite German Motors. Dealer portal for authorized use only.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Generate random dealer ID
+        function generateDealerId() {
+            const prefix = "DLR-";
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            return prefix + randomNum;
+        }
+        
+        // Set the dealer ID
+        document.getElementById('dealer-id').textContent = generateDealerId();
+        
+        // Password check function
+        function checkPassword() {
+            const password = document.getElementById('password-input').value;
+            const correctPassword = "streetcars";
+            
+            if (password === correctPassword) {
+                // Show notification
+                const notification = document.getElementById('notification');
+                notification.style.display = 'block';
+                
+                // Hide login screen and show main content after a delay
+                setTimeout(function() {
+                    document.getElementById('login-screen').style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                    
+                    // Hide notification after 3 seconds
+                    setTimeout(function() {
+                        notification.style.display = 'none';
+                    }, 3000);
+                }, 1000);
+            } else {
+                alert("Incorrect password. Please try again.");
+                document.getElementById('password-input').value = "";
+            }
+        }
+        
+        // Allow pressing Enter to submit password
+        document.getElementById('password-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
+</body>
+</html>
