@@ -150,6 +150,20 @@
             font-weight: 600;
         }
         
+        /* Refresh Timer */
+        .refresh-timer {
+            background: #1a1a1a;
+            color: #c89f63;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 14px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .refresh-timer i {
+            margin-right: 8px;
+        }
+        
         /* Welcome Banner */
         .welcome-banner {
             background: linear-gradient(to right, #1a1a1a, #2a2a2a);
@@ -214,6 +228,18 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
             border: 1px solid #333;
+            position: relative;
+        }
+        
+        .car-card.sold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
         }
         
         .car-card:hover {
@@ -250,10 +276,31 @@
             font-weight: 600;
             font-size: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+        }
+        
+        .sold-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #e74c3c;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 2;
         }
         
         .car-details {
             padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .car-card.sold .car-details {
+            opacity: 0.7;
         }
         
         .car-title {
@@ -263,6 +310,10 @@
             color: #fff;
         }
         
+        .car-card.sold .car-title {
+            color: #999;
+        }
+        
         .car-specs {
             color: #aaa;
             margin-bottom: 12px;
@@ -270,11 +321,19 @@
             line-height: 1.5;
         }
         
+        .car-card.sold .car-specs {
+            color: #777;
+        }
+        
         .car-price {
             font-size: 22px;
             font-weight: 700;
             color: #c89f63;
             margin-bottom: 15px;
+        }
+        
+        .car-card.sold .car-price {
+            color: #999;
         }
         
         .car-price .original {
@@ -289,12 +348,35 @@
             color: #4CAF50;
         }
         
+        .car-card.sold .car-price .export {
+            color: #999;
+        }
+        
+        .sold-info {
+            background: #333;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .sold-info i {
+            color: #e74c3c;
+            margin-right: 5px;
+        }
+        
         .car-features {
             display: flex;
             justify-content: space-between;
             margin-bottom: 15px;
             border-top: 1px solid #333;
             padding-top: 15px;
+        }
+        
+        .car-card.sold .car-features {
+            border-color: #444;
         }
         
         .feature {
@@ -308,10 +390,18 @@
             margin-bottom: 5px;
         }
         
+        .car-card.sold .feature i {
+            color: #777;
+        }
+        
         .feature span {
             display: block;
             font-size: 11px;
             color: #999;
+        }
+        
+        .car-card.sold .feature span {
+            color: #666;
         }
         
         /* Footer */
@@ -503,6 +593,12 @@
             </div>
         </header>
 
+        <!-- Refresh Timer -->
+        <div class="refresh-timer">
+            <i class="fas fa-sync-alt"></i>
+            <span id="refresh-timer">Stock refreshing in: 02:00</span>
+        </div>
+
         <!-- Welcome Banner -->
         <div class="welcome-banner">
             <div class="container">
@@ -659,7 +755,130 @@
                         </div>
                     </div>
                     
-                    <!-- Car 5 -->
+                    <!-- Car 5 - Sold -->
+                    <div class="car-card sold">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/ue62rx.webp" alt="Mercedes-Benz CLA 45 AMG">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                            <div class="sold-badge">SOLD</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">Mercedes-Benz CLA 45 AMG</h3>
+                            <p class="car-specs">2021 • XXXX km • 2.0L Turbo</p>
+                            <div class="car-price">
+                                <span class="original">€24,000</span>
+                                <span class="export">€19,000</span>
+                            </div>
+                            
+                            <div class="sold-info">
+                                <i class="fas fa-check-circle"></i>
+                                Purchased by Dealer ID: <span class="sold-dealer-id">DLR-5821</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>421 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>8-Speed Auto</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>Coupe</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Car 6 - Sold -->
+                    <div class="car-card sold">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/z8m1lx.webp" alt="Audi RS3">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                            <div class="sold-badge">SOLD</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">Audi RS3</h3>
+                            <p class="car-specs">2021 • TFSI PANO MATRIX MAXTON AP • XXXX km • 2.5L TFSI</p>
+                            <div class="car-price">
+                                <span class="original">€19,500</span>
+                                <span class="export">€14,500</span>
+                            </div>
+                            
+                            <div class="sold-info">
+                                <i class="fas fa-check-circle"></i>
+                                Purchased by Dealer ID: <span class="sold-dealer-id">DLR-7394</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>400 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>7-Speed S tronic</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>Sedan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Car 7 - Sold -->
+                    <div class="car-card sold">
+                        <div class="car-image">
+                            <img src="https://files.catbox.moe/wg0tcw.webp" alt="Land Rover Range Rover Sport">
+                            <div class="export-badge">EXPORT -€5,000</div>
+                            <div class="sold-badge">SOLD</div>
+                        </div>
+                        <div class="car-details">
+                            <h3 class="car-title">Range Rover Sport SVR</h3>
+                            <p class="car-specs">2021 • 5.0 V8 P575 Carbon Edition • XXXX km • 5.0L V8</p>
+                            <div class="car-price">
+                                <span class="original">€30,000</span>
+                                <span class="export">€25,000</span>
+                            </div>
+                            
+                            <div class="sold-info">
+                                <i class="fas fa-check-circle"></i>
+                                Purchased by Dealer ID: <span class="sold-dealer-id">DLR-9263</span>
+                            </div>
+                            
+                            <div class="car-features">
+                                <div class="feature">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>575 HP</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>8-Speed Auto</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-car"></i>
+                                    <span>SUV</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Car 8 -->
                     <div class="car-card">
                         <div class="car-image">
                             <img src="https://files.catbox.moe/o8pn7u.webp" alt="Volkswagen Golf R">
@@ -694,7 +913,7 @@
                         </div>
                     </div>
                     
-                    <!-- Car 6 -->
+                    <!-- Car 9 -->
                     <div class="car-card">
                         <div class="car-image">
                             <img src="https://files.catbox.moe/06sjs9.webp" alt="BMW M3 G80 Competition">
@@ -729,7 +948,7 @@
                         </div>
                     </div>
                     
-                    <!-- Car 7 -->
+                    <!-- Car 10 -->
                     <div class="car-card">
                         <div class="car-image">
                             <img src="https://files.catbox.moe/tmksb0.webp" alt="BMW M4 Competition">
@@ -764,7 +983,7 @@
                         </div>
                     </div>
                     
-                    <!-- Car 8 -->
+                    <!-- Car 11 -->
                     <div class="car-card">
                         <div class="car-image">
                             <img src="https://files.catbox.moe/rg3lit.webp" alt="Porsche Cayenne">
@@ -799,7 +1018,7 @@
                         </div>
                     </div>
                     
-                    <!-- Car 9 -->
+                    <!-- Car 12 -->
                     <div class="car-card">
                         <div class="car-image">
                             <img src="https://files.catbox.moe/3v0j7x.webp" alt="Audi RS Q3">
@@ -834,7 +1053,7 @@
                         </div>
                     </div>
                     
-                    <!-- Car 10 -->
+                    <!-- Car 13 -->
                     <div class="car-card">
                         <div class="car-image">
                             <img src="https://files.catbox.moe/aquko0.webp" alt="BMW X6">
@@ -869,7 +1088,7 @@
                         </div>
                     </div>
                     
-                    <!-- Car 11 -->
+                    <!-- Car 14 -->
                     <div class="car-card">
                         <div class="car-image">
                             <img src="https://files.catbox.moe/ihl3te.webp" alt="Lamborghini Aventador">
@@ -904,7 +1123,7 @@
                         </div>
                     </div>
                     
-                    <!-- Car 12 -->
+                    <!-- Car 15 -->
                     <div class="car-card">
                         <div class="car-image">
                             <img src="https://files.catbox.moe/tjulte.webp" alt="2015 Mercedes-Benz G 63 AMG">
@@ -939,7 +1158,7 @@
                         </div>
                     </div>
                     
-                    <!-- Car 13 -->
+                    <!-- Car 16 -->
                     <div class="car-card">
                         <div class="car-image">
                             <img src="https://files.catbox.moe/k15f8f.webp" alt="2024 Mercedes-Benz G 63 AMG">
@@ -1027,6 +1246,11 @@
         // Set the dealer ID
         document.getElementById('dealer-id').textContent = generateDealerId();
         
+        // Generate random dealer IDs for sold items
+        document.querySelectorAll('.sold-dealer-id').forEach(el => {
+            el.textContent = generateDealerId();
+        });
+        
         // Password check function
         function checkPassword() {
             const password = document.getElementById('password-input').value;
@@ -1041,6 +1265,9 @@
                 setTimeout(function() {
                     document.getElementById('login-screen').style.display = 'none';
                     document.getElementById('main-content').style.display = 'block';
+                    
+                    // Start the refresh timer
+                    startRefreshTimer();
                     
                     // Hide notification after 3 seconds
                     setTimeout(function() {
@@ -1059,6 +1286,35 @@
                 checkPassword();
             }
         });
+        
+        // Refresh timer function
+        function startRefreshTimer() {
+            let timeLeft = 120; // 2 minutes in seconds
+            const timerElement = document.getElementById('refresh-timer');
+            
+            const timerInterval = setInterval(function() {
+                timeLeft--;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerElement.innerHTML = '<i class="fas fa-sync-alt"></i> Stock refreshed';
+                    
+                    // Reset timer after 3 seconds
+                    setTimeout(function() {
+                        timeLeft = 120;
+                        updateTimerDisplay(timerElement, timeLeft);
+                    }, 3000);
+                } else {
+                    updateTimerDisplay(timerElement, timeLeft);
+                }
+            }, 1000);
+        }
+        
+        function updateTimerDisplay(timerElement, timeLeft) {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerElement.innerHTML = `<i class="fas fa-sync-alt"></i> Stock refreshing in: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
     </script>
 </body>
 </html>
